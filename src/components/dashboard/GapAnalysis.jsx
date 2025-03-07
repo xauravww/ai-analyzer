@@ -1,12 +1,29 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { motion } from 'framer-motion'
 
 const GapAnalysis = ({ data }) => {
-  // Prepare data for bar chart
+  // Prepare data for bar chart and store the original importance level
   const chartData = data.map(item => ({
     name: item.keyword,
-    importance: item.importance * 25 // Scale to 0-100 for better visualization
+    importance: item.importance * 25, // Scale to 0-100 for better visualization
+    level: item.importance, // Store the original level for color mapping
   }))
+
+  // Function to determine bar color based on the importance level
+  const getColor = (level) => {
+    switch(level) {
+      case 1:
+        return "#93c5fd"  // Low
+      case 2:
+        return "#60a5fa"  // Medium
+      case 3:
+        return "#3b82f6"  // High
+      case 4:
+        return "#1d4ed8"  // Critical
+      default:
+        return "#1d4ed8"  // Fallback color
+    }
+  }
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -52,12 +69,11 @@ const GapAnalysis = ({ data }) => {
                 width={80}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Bar 
-                dataKey="importance" 
-                fill="#0ea5e9" 
-                radius={[0, 4, 4, 0]}
-                barSize={20}
-              />
+              <Bar dataKey="importance" radius={[0, 4, 4, 0]} barSize={20}>
+                {chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={getColor(entry.level)} />
+                ))}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>

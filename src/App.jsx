@@ -74,12 +74,12 @@ function App() {
       const analysisResult = await analysisResponse.json();
       // console.log("analysis result",analysisResult)
       const parsedJson = analysisResult
-      const isResume = parsedJson[0]?.output?.isResume
+      const isResume = parsedJson[0]?.isResume
       if (parsedJson && isResume) {
-        setResumeData(parsedJson[0]?.output);
+        setResumeData(parsedJson[0]);
       } else {
         if (!isResume) {
-          alert(parsedJson[0]?.output?.Summary)
+          alert(parsedJson[0]?.Summary)
         }
         // throw new Error("Failed to parse analysis results");
       }

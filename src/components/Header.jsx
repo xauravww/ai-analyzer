@@ -34,11 +34,13 @@ const Header = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <span className="text-white font-bold text-xl">R</span>
+            <span className="text-white font-bold text-xl cursor-pointer" onClick={()=>window.location.reload()}>R</span>
           </motion.div>
-          <h1 className={`font-bold transition-all duration-300 ${
+          <h1 className={`font-bold transition-all duration-300 cursor-pointer ${
             scrolled ? 'text-secondary-800 text-xl' : 'text-secondary-800 text-2xl'
-          }`}>
+          }`}
+          onClick={()=>window.location.reload()}
+          >
             ResumeAI
           </h1>
         </div>

@@ -68,11 +68,10 @@ const Dashboard = ({ data }) => {
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`px-4 py-2 font-medium text-sm rounded-t-lg transition-colors ${
-                activeTab === tab.id
+              className={`px-4 py-2 font-medium text-sm rounded-t-lg transition-colors ${activeTab === tab.id
                   ? 'bg-white text-primary-600 border-l border-t border-r border-secondary-200'
                   : 'text-secondary-600 hover:text-primary-500'
-              }`}
+                }`}
               onClick={() => setActiveTab(tab.id)}
             >
               {tab.label}
@@ -85,17 +84,16 @@ const Dashboard = ({ data }) => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden absolute top-0 left-0 right-0 bg-white shadow-lg rounded-lg mx-4 z-40"
+            className="md:hidden fixed top-16 left-0 right-0 bg-white shadow-lg rounded-lg mx-4 z-40"
           >
             <div className="flex flex-col p-2 space-y-1">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  className={`px-4 py-3 text-left rounded-lg transition-colors ${
-                    activeTab === tab.id
+                  className={`px-4 py-3 text-left rounded-lg transition-colors ${activeTab === tab.id
                       ? 'bg-primary-100 text-primary-600'
                       : 'text-secondary-600 hover:bg-secondary-50'
-                  }`}
+                    }`}
                   onClick={() => {
                     setActiveTab(tab.id)
                     setIsMobileMenuOpen(false)
@@ -107,6 +105,7 @@ const Dashboard = ({ data }) => {
             </div>
           </motion.div>
         )}
+
       </div>
       {activeTab === 'overview' && (
         <motion.div

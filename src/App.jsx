@@ -4,6 +4,8 @@ import FileUpload from './components/FileUpload';
 import Dashboard from './components/Dashboard';
 import './App.css';
 import mockData from './data/mockData';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [resumeData, setResumeData] = useState(null);
@@ -60,39 +62,55 @@ function App() {
 
       const analysisResponse = await fetch(`${import.meta.env.VITE_N8N_API_URL}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" }, 
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: extractedData 
+          message: extractedData
         })
       });
 
       if (!analysisResponse.ok) {
         const errorData = await analysisResponse.json();
+        setIsLoading(false);
         throw new Error(errorData.message || "Analysis failed");
       }
 
       const analysisResult = await analysisResponse.json();
-      // console.log("analysis result",analysisResult)
-      const parsedJson = analysisResult
-      const isResume = parsedJson[0]?.isResume
+      const parsedJson = analysisResult;
+      const isResume = parsedJson[0]?.isResume;
       if (parsedJson && isResume) {
         setResumeData(parsedJson[0]);
       } else {
         if (!isResume) {
-          alert(parsedJson[0]?.Summary)
+          setIsLoading(false);
+          // Show error toast notification with autoClose timer (5 seconds)
+          toast.error(parsedJson[0]?.Summary, {
+            position: "top-center",
+            autoClose: 10000, // 10000ms = 10 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         }
-        // throw new Error("Failed to parse analysis results");
       }
-
     } catch (error) {
-      // console.error("Error:", error);
       setError("Error processing resume");
+      toast.error("Error processing resume", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     } finally {
       setIsLoading(false);
     }
   };
-
-
 
   return (
     <div className="min-h-screen bg-secondary-50 p-4 sm:p-6 md:p-8">
@@ -116,6 +134,8 @@ function App() {
           </div>
         )}
       </main>
+
+      <ToastContainer />
     </div>
   );
 }

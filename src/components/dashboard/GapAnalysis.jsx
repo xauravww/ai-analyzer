@@ -79,26 +79,27 @@ const GapAnalysis = ({ data }) => {
         </div>
         
         <div className="mt-4">
-          <h3 className="text-sm font-medium text-secondary-600 mb-2">Importance Legend</h3>
-          <div className="flex space-x-4">
-            <div className="flex items-center">
-              <span className="h-3 w-3 bg-primary-300 rounded-full mr-1"></span>
-              <span className="text-xs text-secondary-600">Low</span>
-            </div>
-            <div className="flex items-center">
-              <span className="h-3 w-3 bg-primary-400 rounded-full mr-1"></span>
-              <span className="text-xs text-secondary-600">Medium</span>
-            </div>
-            <div className="flex items-center">
-              <span className="h-3 w-3 bg-primary-500 rounded-full mr-1"></span>
-              <span className="text-xs text-secondary-600">High</span>
-            </div>
-            <div className="flex items-center">
-              <span className="h-3 w-3 bg-primary-700 rounded-full mr-1"></span>
-              <span className="text-xs text-secondary-600">Critical</span>
-            </div>
-          </div>
-        </div>
+  <h3 className="text-sm font-medium text-secondary-600 mb-2">Importance Legend</h3>
+  <div className="flex space-x-4">
+    <div className="flex items-center">
+      <span className="h-3 w-3 bg-blue-300 rounded-full mr-1"></span>
+      <span className="text-xs text-secondary-600">Low</span>
+    </div>
+    <div className="flex items-center">
+      <span className="h-3 w-3 bg-blue-400 rounded-full mr-1"></span>
+      <span className="text-xs text-secondary-600">Medium</span>
+    </div>
+    <div className="flex items-center">
+      <span className="h-3 w-3 bg-blue-500 rounded-full mr-1"></span>
+      <span className="text-xs text-secondary-600">High</span>
+    </div>
+    <div className="flex items-center">
+      <span className="h-3 w-3 bg-blue-700 rounded-full mr-1"></span>
+      <span className="text-xs text-secondary-600">Critical</span>
+    </div>
+  </div>
+</div>
+
       </div>
     </motion.div>
   )
